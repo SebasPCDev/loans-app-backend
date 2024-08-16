@@ -1,8 +1,17 @@
 import express from "express";
 import { defaultRoute } from "./defaultRoute";
-import { calcRoute } from "./calcRoute";
+import moment from "moment";
 
 export const routes = express.Router();
 
+// Global Middleware Logger
+routes.use((req, res, next) => {
+  const date = moment().format("dddd, D MMMM YYYY, h:mm:ss a");
+  console.log(
+    `[Global Middleware Logger] \nHTTP Request: ${req.method}\nPath: ${req.url}\nDate: ${date} \n--------------------`
+  );
+  next();
+});
+
+// Routes
 routes.use(defaultRoute);
-routes.use(calcRoute);
