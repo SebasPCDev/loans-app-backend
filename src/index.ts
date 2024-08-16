@@ -1,22 +1,29 @@
-import express from "express";
-import { Application } from "express";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
+import express, { Application } from "express";
 import { routes } from "./routes";
+import { AppDataSource } from "./config/data-sourcer";
+import dotenv from "dotenv";
+import "reflect-metadata";
+
+dotenv.config();
 
 const app: Application = express();
 
-// body-parser
-app.use(bodyParser.json({ limit: "50mb", type: "application/json" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-dotenv.config();
+// Middleware para el análisis del cuerpo
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// routes
+// Rutas
 app.use("/", routes);
 
-// start the server
-app.listen(process.env.PORT, () => {
-  console.log("*".repeat(80));
-  console.log(`Servidor corriendo en : http://localhost:${process.env.PORT}`);
-  console.log("*".repeat(80));
-});
+// Inicialización de la base de datos y el servidor
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Conexión exitosa");
+    app.listen(process.env.PORT, () => {
+      console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Error al conectar con la base de datos", error);
+    process.exit(1);
+  });
