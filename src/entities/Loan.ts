@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
   JoinColumn,
 } from "typeorm";
-import { User } from "./User";
-import { Payment } from "./Payment";
+import { User } from "@/entities/User";
+import { Payment } from "@/entities/Payment";
 import { StatusLoan } from "../models/statusloan.enum";
 
 @Entity()

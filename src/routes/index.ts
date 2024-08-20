@@ -1,7 +1,7 @@
 import express from "express";
-import { defaultRoute } from "./defaultRoute";
+import { defaultRoute } from "@/routes/defaultRoute";
 import moment from "moment";
-import userRouter from "./userRouter";
+import userRouter from "@/routes/userRouter";
 
 export const routes = express.Router();
 

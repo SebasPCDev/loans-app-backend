@@ -1,25 +1,14 @@
 import express, { Application } from "express";
-import { routes } from "./routes";
-import { AppDataSource } from "./config/data-sourcer";
+import { routes } from "@/routes";
+import { AppDataSource } from "@/config/data-sourcer";
 import dotenv from "dotenv";
 import "reflect-metadata";
-import session from "express-session";
 
 dotenv.config();
 const app: Application = express();
 // Middleware para el análisis del cuerpo
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(
-  session({
-    secret: "sebaspcdev",
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      maxAge: 60000 * 60,
-    },
-  })
-);
 
 // Rutas
 app.use("/", routes);

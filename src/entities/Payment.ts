@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Loan } from "./Loan";
+import { Loan } from "@/entities/Loan";
 
 @Entity({
   name: "payments",
