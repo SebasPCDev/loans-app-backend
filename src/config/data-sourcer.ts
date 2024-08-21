@@ -18,7 +18,7 @@ export const AppDataSource = new DataSource({
   entities: [User, Payment, Loan],
   subscribers: [],
   migrations: [],
-  // dropSchema: true,
+  dropSchema: true,
 });
 
 export const UserModel = AppDataSource.getRepository(User);

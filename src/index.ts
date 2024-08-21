@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cookieParser from "cookie-parser";
 import { routes } from "@/routes";
 import { AppDataSource } from "@/config/data-sourcer";
 import dotenv from "dotenv";
@@ -9,6 +10,7 @@ const app: Application = express();
 // Middleware para el análisis del cuerpo
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cookieParser());
 
 // Rutas
 app.use("/", routes);
