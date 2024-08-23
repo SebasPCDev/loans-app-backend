@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { postNewUser, getAllUsers } from "../controllers";
+import { getAllUsers, getUserById } from "../controllers";
+import { verifyAccessToken } from "@/middlewares/verifyToken";
 
 const userRouter: Router = Router();
 
-userRouter.get("/users", getAllUsers);
-userRouter.post("/newuser", postNewUser);
+userRouter.get("/users", verifyAccessToken, getAllUsers);
+userRouter.get("/users/:id", verifyAccessToken, getUserById);
 
 export default userRouter;

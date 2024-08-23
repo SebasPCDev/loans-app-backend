@@ -33,7 +33,7 @@ export class User {
   })
   age: number;
 
-  @Column({ type: "enum", enum: Role })
+  @Column({ type: "enum", enum: Role, default: Role.LENDER })
   role: string;
 
   @Column({
