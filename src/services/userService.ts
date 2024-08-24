@@ -1,17 +1,7 @@
 import { User } from "../entities/User";
 import { UserModel } from "../config/data-sourcer";
 import bcrypt from "bcrypt";
-
-interface UserWithoutPassword {
-  name: string;
-  last_name: string;
-  email: string;
-  age: number;
-  id: string;
-  role: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { UserWithoutPassword } from "@/interfaces/userWithoutPassword";
 
 export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
   const users = await UserModel.find();

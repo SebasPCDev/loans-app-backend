@@ -3,6 +3,8 @@ import { User } from "@/entities/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { UserWithoutPassword } from "@/interfaces/userWithoutPassword";
+import { CreateUserDto } from "@/dtos/user.dto";
 
 dotenv.config();
 
@@ -34,7 +36,9 @@ export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
   }
 };
 
-export const signupService = async (info: any): Promise<User> => {
+export const signupService = async (
+  info: CreateUserDto
+): Promise<UserWithoutPassword> => {
   try {
     const emailExists = await UserModel.findOneBy({ email: info.email });
     if (emailExists) {
@@ -50,7 +54,9 @@ export const signupService = async (info: any): Promise<User> => {
       password: hashedPassword,
     });
     await UserModel.save(newUser);
-    return newUser;
+
+    const { password, ...userWithoutPassword } = newUser;
+    return userWithoutPassword;
   } catch (error: any) {
     throw new Error(`Signup failed: ${error.message}`);
   }
