@@ -3,6 +3,7 @@ import { User } from "@/entities/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 interface LoginInfo {
@@ -35,22 +36,10 @@ export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
 
 export const signupService = async (info: any): Promise<User> => {
   try {
-    if (
-      !info.name ||
-      !info.last_name ||
-      !info.email ||
-      !info.age ||
-      !info.role ||
-      !info.password
-    ) {
-      throw new Error("All fields are required");
-    }
-
     const emailExists = await UserModel.findOneBy({ email: info.email });
     if (emailExists) {
       throw new Error("User already exists");
     }
-
     const hashedPassword = await bcrypt.hash(info.password, 10);
     const newUser = await UserModel.create({
       name: info.name,

@@ -13,31 +13,6 @@ interface UserWithoutPassword {
   updated_at: Date;
 }
 
-export const createUserService = async (info: any): Promise<User> => {
-  if (
-    !info.name ||
-    !info.last_name ||
-    !info.email ||
-    !info.age ||
-    !info.role ||
-    !info.password
-  ) {
-    throw new Error("All fields are required");
-  }
-
-  const hashedPassword = await bcrypt.hash(info.password, 10);
-  const newUser = await UserModel.create({
-    name: info.name,
-    last_name: info.last_name,
-    email: info.email,
-    age: info.age,
-    role: info.role,
-    password: hashedPassword,
-  });
-  await UserModel.save(newUser);
-  return newUser;
-};
-
 export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
   const users = await UserModel.find();
 

@@ -1,13 +1,20 @@
-import { Response, NextFunction } from "express";
+import { Role } from "@/models/role.enum";
+import { Response, NextFunction, Request } from "express";
+import { JwtPayload } from "jsonwebtoken";
 
-export const verifyRole = (role: string) => {
+interface CustomRequest extends Request {
+  user?: JwtPayload;
+}
+
+export const verifyRole = (roles: Role[]) => {
   return (req: CustomRequest, res: Response, next: NextFunction) => {
-    const userRole = req.user?.role;
-    if (userRole !== role) {
-      return res.status(403).json({
-        message: "Access denied. You do not have the required role.",
-      });
+    const roleVerified = roles.includes(req.user?.role);
+    if (roleVerified) {
+      next();
+    } else {
+      res
+        .status(403)
+        .json({ message: "No tienes permisos para realizar esta acción" });
     }
-    next();
   };
 };
