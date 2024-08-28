@@ -4,6 +4,7 @@ import { routes } from "@/routes";
 import { AppDataSource } from "@/config/data-sourcer";
 import dotenv from "dotenv";
 import "reflect-metadata";
+import { seedDatabase } from "./utils/seed";
 
 dotenv.config();
 const app: Application = express();
@@ -17,8 +18,11 @@ app.use("/", routes);
 
 // Inicialización de la base de datos y el servidor
 AppDataSource.initialize()
-  .then(() => {
+  .then(async () => {
     console.log("Conexión exitosa");
+
+    await seedDatabase();
+
     app.listen(process.env.PORT, () => {
       console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
     });

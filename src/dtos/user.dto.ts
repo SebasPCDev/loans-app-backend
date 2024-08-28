@@ -6,8 +6,6 @@ import {
   IsNumber,
   IsString,
   Matches,
-  MaxLength,
-  MinLength,
 } from "class-validator";
 
 export class CreateUserDto {
@@ -34,5 +32,5 @@ export class CreateUserDto {
   age: number;
 
   @IsEnum(Role, { message: "Debe ser un rol válido" })
-  role: Role;
+  role: Role = Role.LENDER;
 }

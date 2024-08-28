@@ -2,7 +2,6 @@ import express from "express";
 import { defaultRoute } from "@/routes/defaultRoute";
 import moment from "moment";
 import userRouter from "@/routes/userRouter";
-import { log } from "console";
 import authRouter from "./authRouter";
 
 export const routes = express.Router();
@@ -18,5 +17,5 @@ routes.use((req, res, next) => {
 
 // Routes
 routes.use(defaultRoute);
-routes.use(userRouter);
 routes.use(authRouter);
+routes.use(userRouter);
