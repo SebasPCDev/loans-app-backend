@@ -1,7 +1,6 @@
 import { signupService } from "@/services/authService";
+import { CustomErrors } from "@/utils/errors/customError";
 import { Request, Response } from "express";
-import { plainToClass } from "class-transformer";
-import { validate } from "class-validator";
 
 export default async (req: Request, res: Response) => {
   const data = req.body;

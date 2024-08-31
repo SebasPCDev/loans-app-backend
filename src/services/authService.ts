@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { UserWithoutPassword } from "@/interfaces/userWithoutPassword";
 import { CreateUserDto } from "@/dtos/user.dto";
+import { CustomErrors } from "@/utils/errors/customError";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ interface LoginResponse {
   token: string;
 }
 
+//Funciones principales
 export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
   try {
     validateLoginInfo(info);
@@ -31,8 +33,7 @@ export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
 
     return { user: userWithoutPassword, token };
   } catch (error: any) {
-    // Log the error or send it to an error tracking service
-    throw new Error(`Login failed: ${error.message}`);
+    throw new CustomErrors("AUTHENTICATION_FAILED");
   }
 };
 
@@ -42,7 +43,7 @@ export const signupService = async (
   try {
     const emailExists = await UserModel.findOneBy({ email: info.email });
     if (emailExists) {
-      throw new Error("User already exists");
+      throw new CustomErrors("USER_ALREADY_EXISTS");
     }
     const hashedPassword = await bcrypt.hash(info.password, 10);
     const newUser = await UserModel.create({
@@ -58,20 +59,22 @@ export const signupService = async (
     const { password, ...userWithoutPassword } = newUser;
     return userWithoutPassword;
   } catch (error: any) {
-    throw new Error(`Signup failed: ${error.message}`);
+    throw new CustomErrors("SIGNUP_FAILED");
   }
 };
 
+//Funciones auxiliares
+
 const validateLoginInfo = (info: LoginInfo): void => {
   if (!info.email || !info.password) {
-    throw new Error("All fields are required");
+    throw new CustomErrors("ALL_FIELDS_REQUIRED");
   }
 };
 
 const findUserByEmail = async (email: string): Promise<User> => {
   const user = await UserModel.findOneBy({ email });
   if (!user) {
-    throw new Error("User not found");
+    throw new CustomErrors("USER_NOT_FOUND");
   }
   return user;
 };
@@ -82,7 +85,7 @@ const verifyPassword = async (
 ): Promise<void> => {
   const isMatch = await bcrypt.compare(inputPassword, storedPassword);
   if (!isMatch) {
-    throw new Error("Invalid password");
+    throw new CustomErrors("AUTHENTICATION_FAILED");
   }
 };
 

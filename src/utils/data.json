@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Juan",
+    "last_name": "Pérez",
+    "email": "test1@mail.com",
+    "age": 30,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Ana",
+    "last_name": "Gómez",
+    "email": "test2@mail.com",
+    "age": 28,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Carlos",
+    "last_name": "Rodríguez",
+    "email": "test3@mail.com",
+    "age": 35,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Lucía",
+    "last_name": "Martínez",
+    "email": "test4@mail.com",
+    "age": 26,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Pedro",
+    "last_name": "López",
+    "email": "test5@mail.com",
+    "age": 32,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Sofía",
+    "last_name": "García",
+    "email": "test6@mail.com",
+    "age": 24,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Miguel",
+    "last_name": "Fernández",
+    "email": "test7@mail.com",
+    "age": 33,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Laura",
+    "last_name": "Hernández",
+    "email": "test8@mail.com",
+    "age": 29,
+    "password": "Test1234!"
+  },
+  {
+    "name": "David",
+    "last_name": "Ramírez",
+    "email": "test9@mail.com",
+    "age": 31,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Isabel",
+    "last_name": "Sánchez",
+    "email": "test10@mail.com",
+    "age": 27,
+    "password": "Test1234!"
+  },
+  {
+    "name": "José",
+    "last_name": "Castro",
+    "email": "test11@mail.com",
+    "age": 36,
+    "password": "Test1234!"
+  },
+  {
+    "name": "María",
+    "last_name": "Vega",
+    "email": "test12@mail.com",
+    "age": 30,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Javier",
+    "last_name": "Díaz",
+    "email": "test13@mail.com",
+    "age": 34,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Elena",
+    "last_name": "Morales",
+    "email": "test14@mail.com",
+    "age": 25,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Manuel",
+    "last_name": "Ortiz",
+    "email": "test15@mail.com",
+    "age": 37,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Raquel",
+    "last_name": "Ramos",
+    "email": "test16@mail.com",
+    "age": 28,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Fernando",
+    "last_name": "Torres",
+    "email": "test17@mail.com",
+    "age": 32,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Patricia",
+    "last_name": "Flores",
+    "email": "test18@mail.com",
+    "age": 29,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Antonio",
+    "last_name": "Ríos",
+    "email": "test19@mail.com",
+    "age": 35,
+    "password": "Test1234!"
+  },
+  {
+    "name": "Carmen",
+    "last_name": "Herrera",
+    "email": "test20@mail.com",
+    "age": 27,
+    "password": "Test1234!"
+  }
+]

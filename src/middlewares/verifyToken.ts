@@ -1,6 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { CustomErrors } from "@/utils/errors/customError";
 dotenv.config();
 
 interface CustomRequest extends Request {
@@ -14,16 +15,12 @@ export const verifyAccessToken = (
 ) => {
   const token = req.cookies.access_token;
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Access denied. No token provided." });
+    return new CustomErrors("UNAUTHORIZED").returnError(res);
   }
 
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    return res
-      .status(500)
-      .json({ message: "Internal server error. JWT secret missing." });
+    return new CustomErrors("INTERNAL_SERVER_ERROR").returnError(res);
   }
 
   try {

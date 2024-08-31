@@ -14,7 +14,7 @@ export function validationDtoMiddleware(
         const message = errors.reduce((acc, error) => {
           return { ...acc, ...error.constraints };
         }, {});
-        res.status(400).send({ error: message });
+        res.status(400).send({ message: Object.values(message) });
       } else {
         next();
       }

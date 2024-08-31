@@ -23,7 +23,7 @@ export const authorizeUserOrAdmin = async (
       userToFindId !== authenticatedUser?.id &&
       authenticatedUser?.role !== Role.ADMIN
     ) {
-      return new CustomErrors("UNAUTHORIZED", 401);
+      return new CustomErrors("UNAUTHORIZED");
     }
 
     next();

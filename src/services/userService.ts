@@ -2,6 +2,7 @@ import { User } from "../entities/User";
 import { UserModel } from "../config/data-sourcer";
 import bcrypt from "bcrypt";
 import { UserWithoutPassword } from "@/interfaces/userWithoutPassword";
+import { CustomErrors } from "@/utils/errors/customError";
 
 export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
   const users = await UserModel.find();
@@ -19,7 +20,7 @@ export const getUserByIdService = async (
 ): Promise<UserWithoutPassword> => {
   const user = await UserModel.findOneBy({ id });
   if (!user) {
-    throw new Error("User not found");
+    throw new CustomErrors("USER_NOT_FOUND");
   }
 
   const { password, ...userWithoutPassword } = user;
