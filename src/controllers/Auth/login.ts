@@ -13,7 +13,7 @@ export default async (req: Request, res: Response) => {
         maxAge: 3600000,
       })
       .status(200)
-      .json(request);
+      .json({ message: "Inicio de sesión exitoso", user: request.user });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

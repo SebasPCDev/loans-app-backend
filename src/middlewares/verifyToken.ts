@@ -28,12 +28,6 @@ export const verifyAccessToken = (
     req.user = decoded;
     next();
   } catch (error) {
-    if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ message: "Token expired." });
-    } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(400).json({ message: "Invalid token." });
-    } else {
-      return res.status(500).json({ message: "Internal server error." });
-    }
+    return new CustomErrors("INTERNAL_SERVER_ERROR").returnError(res);
   }
 };

@@ -1,4 +1,5 @@
 import { Role } from "@/models/role.enum";
+import { CustomErrors } from "@/utils/errors/customError";
 import { Response, NextFunction, Request } from "express";
 import { JwtPayload } from "jsonwebtoken";
 
@@ -12,9 +13,7 @@ export const verifyRole = (roles: Role[]) => {
     if (roleVerified) {
       next();
     } else {
-      res
-        .status(403)
-        .json({ message: "No tienes permisos para realizar esta acción" });
+      return new CustomErrors("UNAUTHORIZED").returnError(res);
     }
   };
 };

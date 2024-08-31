@@ -23,11 +23,11 @@ export const authorizeUserOrAdmin = async (
       userToFindId !== authenticatedUser?.id &&
       authenticatedUser?.role !== Role.ADMIN
     ) {
-      return new CustomErrors("UNAUTHORIZED");
+      return new CustomErrors("UNAUTHORIZED").returnError(res);
     }
 
     next();
   } catch (error) {
-    next(error);
+    return new CustomErrors("INTERNAL_SERVER_ERROR").returnError(res);
   }
 };

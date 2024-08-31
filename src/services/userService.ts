@@ -3,6 +3,7 @@ import { UserModel } from "../config/data-sourcer";
 import bcrypt from "bcrypt";
 import { UserWithoutPassword } from "@/interfaces/userWithoutPassword";
 import { CustomErrors } from "@/utils/errors/customError";
+import { UpdateUserDto } from "@/dtos/user.dto";
 
 export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
   const users = await UserModel.find();
@@ -25,4 +26,20 @@ export const getUserByIdService = async (
 
   const { password, ...userWithoutPassword } = user;
   return userWithoutPassword;
+};
+
+export const updateUserByIdService = async (
+  body: UpdateUserDto,
+  id: string
+) => {
+  const user = await UserModel.findOneBy({ id });
+  if (!user) {
+    throw new CustomErrors("USER_NOT_FOUND");
+  }
+
+  const updatedUser = UserModel.merge(user, body);
+
+  await UserModel.save(updatedUser);
+
+  return updatedUser;
 };

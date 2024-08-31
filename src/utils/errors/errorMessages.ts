@@ -6,7 +6,7 @@ export const ErrorMessages: {
     statusCode: 401,
   },
   UNAUTHORIZED: {
-    message: "No tienes permiso para acceder a esta información",
+    message: "No tienes permiso para realizar esta acción",
     statusCode: 401,
   },
   SIGNUP_FAILED: {
