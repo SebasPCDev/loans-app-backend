@@ -1,0 +1,80 @@
+[
+  {
+    "debtor_name": "Juan",
+    "debtor_last_name": "Pérez",
+    "debtor_email": "juan.perez@example.com",
+    "debtor_age": 35,
+    "debtor_role": "DEBTOR",
+    "amount": 5000,
+    "interest_rate": "5%",
+    "start_date": "2024-09-01T00:00:00.000Z",
+    "end_date": "2025-09-01T00:00:00.000Z",
+    "frequency_payment": "MONTHLY",
+    "status": "PENDING"
+  },
+  {
+    "debtor_name": "Ana",
+    "debtor_last_name": "García",
+    "debtor_email": "ana.garcia@example.com",
+    "debtor_age": 42,
+    "debtor_role": "DEBTOR",
+    "amount": 15000,
+    "interest_rate": "4.5%",
+    "start_date": "2024-10-01T00:00:00.000Z",
+    "end_date": "2026-10-01T00:00:00.000Z",
+    "frequency_payment": "QUARTERLY",
+    "status": "PENDING"
+  },
+  {
+    "debtor_name": "Luis",
+    "debtor_last_name": "Martínez",
+    "debtor_email": "luis.martinez@example.com",
+    "debtor_age": 28,
+    "debtor_role": "DEBTOR",
+    "amount": 2000,
+    "interest_rate": "6%",
+    "start_date": "2024-11-01T00:00:00.000Z",
+    "end_date": "2025-11-01T00:00:00.000Z",
+    "frequency_payment": "BI-WEEKLY",
+    "status": "PENDING"
+  },
+  {
+    "debtor_name": "Laura",
+    "debtor_last_name": "Rodríguez",
+    "debtor_email": "laura.rodriguez@example.com",
+    "debtor_age": 31,
+    "debtor_role": "DEBTOR",
+    "amount": 7500,
+    "interest_rate": "5.75%",
+    "start_date": "2024-12-01T00:00:00.000Z",
+    "end_date": "2026-12-01T00:00:00.000Z",
+    "frequency_payment": "MONTHLY",
+    "status": "PENDING"
+  },
+  {
+    "debtor_name": "Carlos",
+    "debtor_last_name": "Sánchez",
+    "debtor_email": "carlos.sanchez@example.com",
+    "debtor_age": 46,
+    "debtor_role": "DEBTOR",
+    "amount": 10000,
+    "interest_rate": "4%",
+    "start_date": "2024-09-15T00:00:00.000Z",
+    "end_date": "2025-09-15T00:00:00.000Z",
+    "frequency_payment": "MONTHLY",
+    "status": "PENDING"
+  },
+  {
+    "debtor_name": "María",
+    "debtor_last_name": "Fernández",
+    "debtor_email": "maria.fernandez@example.com",
+    "debtor_age": 39,
+    "debtor_role": "DEBTOR",
+    "amount": 3000,
+    "interest_rate": "5.25%",
+    "start_date": "2024-08-01T00:00:00.000Z",
+    "end_date": "2025-08-01T00:00:00.000Z",
+    "frequency_payment": "MONTHLY",
+    "status": "PENDING"
+  }
+]

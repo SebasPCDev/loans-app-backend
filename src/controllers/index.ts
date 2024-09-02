@@ -5,3 +5,7 @@ export { default as getUserById } from "@/controllers/Users/getUserById";
 //Auth controllers
 
 export { default as login } from "@/controllers/Auth/login";
+
+//Loans controllers
+
+export { default as postLoan } from "@/controllers/Loans/postLoan";

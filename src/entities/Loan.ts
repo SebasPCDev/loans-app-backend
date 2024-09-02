@@ -11,6 +11,7 @@ import {
 import { User } from "@/entities/User";
 import { Payment } from "@/entities/Payment";
 import { StatusLoan } from "../models/statusloan.enum";
+import { FrequencyPayment } from "@/models/frequencyPayment";
 
 @Entity()
 export class Loan {
@@ -25,25 +26,26 @@ export class Loan {
   @JoinColumn({ name: "debtor_id" })
   debtor: User;
 
-  @Column("decimal", { precision: 10, scale: 2 })
+  @Column({ type: "decimal", precision: 10, scale: 2 })
   amount: number;
 
-  @Column("decimal", { precision: 5, scale: 2 })
+  @Column({ type: "decimal", precision: 10, scale: 2 })
   interest_rate: number;
 
-  @Column("date")
+  @Column({ type: "date" })
   start_date: string;
 
-  @Column("date")
+  @Column({ type: "date" })
   end_date: string;
 
-  @Column("varchar")
+  @Column({
+    type: "enum",
+    enum: FrequencyPayment,
+    default: FrequencyPayment.MONTHLY,
+  })
   payment_frequency: string;
 
-  @Column("decimal", { precision: 10, scale: 2 })
-  total_repayment: number;
-
-  @Column("decimal", { precision: 10, scale: 2 })
+  @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
   remaining_balance: number;
 
   @Column({

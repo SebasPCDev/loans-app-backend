@@ -2,10 +2,10 @@ import { Router } from "express";
 import { getAllUsers, getUserById } from "../controllers";
 import { verifyAccessToken } from "@/middlewares/verifyToken";
 import { verifyRole } from "@/middlewares/verifyRole";
-import { Role } from "@/models/role.enum";
 import { authorizeUserOrAdmin } from "@/middlewares/authorization";
-import updateUserById from "@/controllers/Users/updateUserById";
 import { validationDtoMiddleware } from "@/middlewares/validationDto";
+import { Role } from "@/models/role.enum";
+import updateUserById from "@/controllers/Users/updateUserById";
 import { UpdateUserDto } from "@/dtos/user.dto";
 
 const userRouter: Router = Router();

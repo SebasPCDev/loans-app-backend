@@ -19,7 +19,7 @@ export function validationDtoMiddleware(
       return res.status(400).send({ message: Object.values(message) });
     }
 
-    // Paso 2: Verificar campos adicionales
+    // Verificar campos adicionales
     const allowedFields = Object.keys(plainToClass(type, {}));
     const bodyFields = Object.keys(req.body);
 

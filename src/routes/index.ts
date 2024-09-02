@@ -3,6 +3,7 @@ import { defaultRoute } from "@/routes/defaultRoute";
 import moment from "moment";
 import userRouter from "@/routes/userRouter";
 import authRouter from "./authRouter";
+import loansRouter from "./loansRouter";
 
 export const routes = express.Router();
 
@@ -19,3 +20,4 @@ routes.use((req, res, next) => {
 routes.use(defaultRoute);
 routes.use(authRouter);
 routes.use(userRouter);
+routes.use(loansRouter);
