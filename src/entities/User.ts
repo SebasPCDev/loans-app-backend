@@ -1,6 +1,7 @@
 import { Role } from "../models/role.enum";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Loan } from "@/entities/Loan";
+import { Exclude } from "class-transformer";
 
 //src
 @Entity({
@@ -48,6 +49,7 @@ export class User {
     type: "varchar",
     length: 100,
   })
+  @Exclude()
   password: string;
 
   @Column({

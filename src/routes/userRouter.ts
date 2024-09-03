@@ -19,7 +19,7 @@ userRouter.get(
 userRouter.get(
   "/users/:id",
   verifyAccessToken,
-  verifyRole([Role.LENDER, Role.ADMIN]),
+  verifyRole([Role.LENDER, Role.ADMIN, Role.DEBTOR]),
   authorizeUserOrAdmin,
   getUserById
 );

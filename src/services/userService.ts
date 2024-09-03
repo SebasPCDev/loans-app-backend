@@ -21,7 +21,10 @@ export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
 export const getUserByIdService = async (
   id: string
 ): Promise<UserWithoutPassword> => {
-  const user = await UserModel.findOneBy({ id });
+  const user = await UserModel.findOne({
+    where: { id },
+    relations: ["loans", "loans.debtor", "loans.lender"],
+  });
   if (!user) {
     throw new CustomErrors("USER_NOT_FOUND");
   }

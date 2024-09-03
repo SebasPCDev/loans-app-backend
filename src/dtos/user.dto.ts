@@ -1,5 +1,5 @@
 import { Role } from "@/models/role.enum";
-import { Expose } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 import {
   IsEmail,
   IsEnum,

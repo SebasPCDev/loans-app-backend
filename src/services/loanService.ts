@@ -4,11 +4,14 @@ import { Role } from "@/models/role.enum";
 import bcrypt from "bcrypt";
 
 export const postLoan = async (data: any, id: string) => {
+  //1. Verificar si el deudor ya existe
   const debtorFind = await UserModel.findOneBy({
     identification: data.debtor_identification,
-  }); // id del usuario que se va a prestar el dinero
+  });
+  //2. Obtenemos la información del prestamista
   const lenderFind = await UserModel.findOneBy({ id: id }); // id del usuario logueado
 
+  //3. Si el deudor no existe, se crea
   if (!debtorFind) {
     const randomPassword = "Test1234!"; //Math.random().toString(36).slice(-8);
     const hashedPassword = await bcrypt.hash(randomPassword, 10);
@@ -23,6 +26,7 @@ export const postLoan = async (data: any, id: string) => {
     });
     await UserModel.save(debtor);
 
+    //4. Se crea el préstamo
     const loan = LoanModel.create({
       debtor: debtor as User,
       lender: lenderFind as User,
@@ -34,6 +38,8 @@ export const postLoan = async (data: any, id: string) => {
       remaining_balance: 0,
       status: data.status,
     });
+
+    //5. Se guarda el préstamo
 
     await LoanModel.save(loan);
 
