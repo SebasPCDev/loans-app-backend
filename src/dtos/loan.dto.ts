@@ -26,6 +26,11 @@ export class CreateLoanDTO {
   debtor_last_name: string;
 
   @Expose()
+  @IsString()
+  @IsNotEmpty()
+  debtor_identification: string;
+
+  @Expose()
   @IsEmail()
   @IsNotEmpty()
   debtor_email: string;
@@ -68,5 +73,5 @@ export class CreateLoanDTO {
 
   @Expose()
   @IsEnum(StatusLoan)
-  status: StatusLoan = StatusLoan.PENDING;
+  status: StatusLoan;
 }

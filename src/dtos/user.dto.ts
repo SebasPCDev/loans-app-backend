@@ -14,6 +14,11 @@ export class CreateUserDto {
   @Expose()
   @IsNotEmpty()
   @IsString()
+  identification: string;
+
+  @Expose()
+  @IsNotEmpty()
+  @IsString()
   name: string;
 
   @Expose()
@@ -43,6 +48,11 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
+  @Expose()
+  @IsOptional()
+  @IsString()
+  identification: string;
+
   @Expose()
   @IsOptional()
   @IsString()

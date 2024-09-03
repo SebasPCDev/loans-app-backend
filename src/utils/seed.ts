@@ -10,6 +10,7 @@ export const seedDatabase = async () => {
   try {
     const hash = await bcrypt.hash("Admin123!", 10);
     const adminSeed = await UserModel.create({
+      identification: "0000000000",
       name: "Admin",
       last_name: "God",
       email: "admin@admin.com",

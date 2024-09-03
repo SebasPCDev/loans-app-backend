@@ -6,7 +6,9 @@ import { CustomErrors } from "@/utils/errors/customError";
 import { UpdateUserDto } from "@/dtos/user.dto";
 
 export const getAllUsersService = async (): Promise<UserWithoutPassword[]> => {
-  const users = await UserModel.find();
+  const users = await UserModel.find({
+    relations: ["loans"],
+  });
 
   const usersWithoutPassword = users.map((user) => {
     const { password, ...userWithoutPassword } = user;
@@ -41,5 +43,7 @@ export const updateUserByIdService = async (
 
   await UserModel.save(updatedUser);
 
-  return updatedUser;
+  const { password, ...userWithoutPassword } = updatedUser;
+
+  return userWithoutPassword;
 };

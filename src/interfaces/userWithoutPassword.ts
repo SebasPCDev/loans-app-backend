@@ -1,4 +1,5 @@
 export interface UserWithoutPassword {
+  identification: string;
   name: string;
   last_name: string;
   email: string;

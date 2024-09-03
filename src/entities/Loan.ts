@@ -52,7 +52,7 @@ export class Loan {
     type: "enum",
     enum: StatusLoan,
   })
-  status: string;
+  status: StatusLoan;
 
   @OneToMany(() => Payment, (payment) => payment.loan)
   payments: Payment[];
