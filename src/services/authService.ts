@@ -14,13 +14,10 @@ interface LoginInfo {
   password: string;
 }
 
-interface LoginResponse {
-  user: Omit<User, "password">;
-  token: string;
-}
-
 //Funciones principales
-export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
+export const loginService = async (
+  info: LoginInfo
+): Promise<{ user: User; token: string }> => {
   try {
     validateLoginInfo(info);
 
@@ -29,9 +26,7 @@ export const loginService = async (info: LoginInfo): Promise<LoginResponse> => {
 
     const token = generateToken(user);
 
-    const { password, ...userWithoutPassword } = user;
-
-    return { user: userWithoutPassword, token };
+    return { user: user.toSafeObject() as User, token };
   } catch (error: any) {
     throw new CustomErrors("AUTHENTICATION_FAILED");
   }

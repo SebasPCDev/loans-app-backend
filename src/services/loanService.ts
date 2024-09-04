@@ -1,13 +1,17 @@
 import { LoanModel, UserModel } from "@/config/data-sourcer";
 import { User } from "@/entities/User";
-import { Role } from "@/models/role.enum";
 import bcrypt from "bcrypt";
 
 export const postLoan = async (data: any, id: string) => {
   //1. Verificar si el deudor ya existe
-  const debtorFind = await UserModel.findOneBy({
-    identification: data.debtor_identification,
+  const debtorFind = await UserModel.findOne({
+    where: {
+      identification: data.debtor_identification,
+      email: data.debtor_email,
+    },
   });
+  console.log(debtorFind);
+
   //2. Obtenemos la información del prestamista
   const lenderFind = await UserModel.findOneBy({ id: id }); // id del usuario logueado
 
@@ -27,9 +31,9 @@ export const postLoan = async (data: any, id: string) => {
     await UserModel.save(debtor);
 
     //4. Se crea el préstamo
-    const loan = LoanModel.create({
-      debtor: debtor as User,
-      lender: lenderFind as User,
+    const loanExistedDebtor = LoanModel.create({
+      debtor: debtor.toSafeObject(),
+      lender: lenderFind!.toSafeObject(),
       amount: data.amount,
       interest_rate: data.interest_rate,
       start_date: data.start_date,
@@ -40,13 +44,43 @@ export const postLoan = async (data: any, id: string) => {
     });
 
     //5. Se guarda el préstamo
+    await LoanModel.save(loanExistedDebtor);
 
-    await LoanModel.save(loan);
+    return {
+      message: `Se ha creado un nuevo usuario ${debtor.name} ${debtor.last_name} y un nuevo préstamo`,
+      loan: loanExistedDebtor,
+    };
+  } else {
+    //6. Si el deudor ya existe, se muestra un mensaje
+    if (data.debtor_email !== debtorFind.email) {
+      return {
+        message:
+          "El correo no coincide con la identificación del deudor registrado",
+      };
+    }
 
-    return { message: "Préstamo creado con éxtito", loan: loan }; // Devuelve el objeto loan
+    const loanNoDebtor = LoanModel.create({
+      debtor: debtorFind.toSafeObject(),
+      lender: lenderFind!.toSafeObject(),
+      amount: data.amount,
+      interest_rate: data.interest_rate,
+      start_date: data.start_date,
+      end_date: data.end_date,
+      payment_frequency: data.frequency_payment,
+      remaining_balance: 0,
+      status: data.status,
+    });
+
+    await LoanModel.save(loanNoDebtor);
+
+    return {
+      message: `Se ha añadido un nuevo préstamo a ${debtorFind?.name} ${debtorFind?.last_name}`,
+      loan: loanNoDebtor,
+    };
   }
-
-  return { message: "El deudor ya existe" };
 };
 
-//Funciones auxiliares
+const deletePassword = (data: User) => {
+  const { password, ...deptorWithOutPassword } = data;
+  return deptorWithOutPassword;
+};

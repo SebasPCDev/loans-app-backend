@@ -49,7 +49,6 @@ export class User {
     type: "varchar",
     length: 100,
   })
-  @Exclude()
   password: string;
 
   @Column({
@@ -68,4 +67,9 @@ export class User {
 
   @OneToMany(() => Loan, (loan) => loan.debtor)
   loans: Loan[];
+
+  toSafeObject(): Partial<User> {
+    const { password, ...safeData } = this;
+    return safeData;
+  }
 }

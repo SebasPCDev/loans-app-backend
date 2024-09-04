@@ -2,24 +2,44 @@ import { UserModel } from "@/config/data-sourcer";
 import bcrypt from "bcrypt";
 
 export const seedDatabase = async () => {
-  const emailExists = await UserModel.findOneBy({ email: "admin@admin.com" });
-  if (emailExists) {
-    console.log("Datos precargados anteriormente");
-    return;
-  }
-  try {
-    const hash = await bcrypt.hash("Admin123!", 10);
-    const adminSeed = await UserModel.create({
+  const users = [
+    {
       identification: "0000000000",
       name: "Admin",
       last_name: "God",
       email: "admin@admin.com",
-      password: hash,
+      password: "Admin123!",
       age: 30,
       role: "admin",
-    });
-    await UserModel.save(adminSeed);
-    console.log("Datos precargados correctamente");
+    },
+    {
+      identification: "1234567890",
+      name: "John",
+      last_name: "Doe",
+      email: "lender@mail.com",
+      password: "John123!",
+      age: 25,
+      role: "lender",
+    },
+  ];
+
+  try {
+    for (const user of users) {
+      const emailExists = await UserModel.findOneBy({ email: user.email });
+      if (emailExists) {
+        console.log(`Usuario con email ${user.email} ya existe.`);
+        continue;
+      }
+
+      const hash = await bcrypt.hash(user.password, 10);
+      const userSeed = UserModel.create({
+        ...user,
+        password: hash,
+      });
+
+      await UserModel.save(userSeed);
+      console.log(`Usuario ${user.email} precargado correctamente`);
+    }
   } catch (error) {
     console.error("Error en la precarga de datos:", error);
     throw error;
